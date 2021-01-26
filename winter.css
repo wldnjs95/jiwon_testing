@@ -1,0 +1,31 @@
+
+.wrap{
+  color : #adb32f;
+  text-align : center;
+  margin : auto;
+  width:100%;
+  height:100%;
+  font-size : 200%;
+  margin : 50px;
+}
+
+quote p {
+    padding: 30px;
+    background: #eeeeee;
+    border-radius: 20px;
+
+}
+
+quote p::before {
+    content: '\201C';
+}
+
+quote p::after {
+    content: '\201D';
+}
+
+.myblock{
+  margin-left : 620px;
+  margin-right: 620px;
+
+}
