@@ -1,0 +1,97 @@
+<html>
+<head>
+<script src="./vextab-master/releases/div.dev.js"></script>
+<script src="./vextab-master/releases/vextab-div.js"></script>
+<link rel="stylesheet" href="vex/vextab.css" type="text/css">
+</head>
+<body>
+<div class="vextab-auto"
+    width=680 scale=1.0 >
+    options space=20
+    tabstave notation=true key=Bb time=4/4 tablature=false
+
+    notes :16 A/4 A/4 A/4 A/4 ##
+
+</div>
+
+<div id="boo"></div>
+<script>
+const data = `
+  tabstave notation=true key=A time=4/4
+
+  notes :q =|: (5/2.5/3.7/4) :8 7-5h6/3 ^3^ 5h6-7/5 ^3^ :q 7V/4 |
+  notes :8 t12p7/4 s5s3/4 :8 3s:16:5-7/5 :q p5/4
+  text :w, |#segno, ,|, :hd, , #tr
+`
+
+const VF = vextab.Vex.Flow
+
+const renderer = new VF.Renderer($('#boo')[0],
+	VF.Renderer.Backends.SVG);
+
+// Initialize VexTab artist and parser.
+const artist = new vextab.Artist(10, 10, 750, { scale: 0.8 });
+const tab = new vextab.VexTab(artist);
+
+tab.parse(data);
+artist.render(renderer);
+
+var str=""
+var size=256;
+
+function addOptionHead(){
+	str+= `
+    options space=20
+    tabstave notation=true key=Bb time=4/4 tablature=false 
+	notes 
+	`
+}
+
+function getLength(){
+	var arr=[1, 2, 2, 2, 3, 3, 3, 3, 3, 3, 3, 4, 4, 4, 5];
+	var i = Math.floor(Math.random()*arr.length);
+	return (1>>(arr[i]-1));
+}
+var k = ["B/2", "C/3", "D/3", "E/3", "F/3", "G/3", "A/4", "B/4", "C/4", "D/4", "E/4", "F/4", "G/4", "A/4"];
+function getHigh(last){
+	var res = Math.floor(Math.random()*k.length);
+	while(Math.abs(last-res) > 8)res = Math.floor(Math.random()*k.length);
+	return res;	
+}
+
+function getandset(){
+	size=256;
+	var rest = 0;
+	var isrested = false;
+	var madilimit = 240;
+	var linelimit = 192;
+	getLength();
+	
+	var isover = false;
+	var last = 8;
+	while(size>0){
+		var length = getLength();
+		while(size - length < madilimit)length = getLength();
+		str+=" :"+length+" ";
+		var r = getHigh(last);
+		last = r;
+		str += k[r]+" ";
+		size -= length;
+		if(size==0)break;
+		if(madilimit == size){
+			madilimit -= 16;
+			str+=" | ";
+		}
+		if(linelimit == size){
+			madilimit -= 64;
+			str+=addOptionHead();
+		}
+		
+	}
+	var doc = document.getElementsByClassName("vextab-auto")[0];
+	//doc.innerHTML = str;
+}
+getandset();
+</script>
+</body>
+</html>
