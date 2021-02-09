@@ -56,7 +56,7 @@ function getandset(){
 		str+=" :"+16/length+" ";
 		var r = getHigh(last);
 		last = r;
-		str += (Math.random()>0.5&&length!=1&&madilimit!=size-length?"##":k[r])+" ";
+		str += (Math.random()<0.45&&length!=1&&madilimit!=size-length?"##":k[r])+" ";
 		size -= length;
 		if(size==0)break;
 		if(madilimit == size){
