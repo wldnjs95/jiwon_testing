@@ -16,6 +16,7 @@
     height: 64px;
 
     margin-top: 50px;
+    margin-left: 50px;
     padding: 10px;
     padding-left: 39px;
     padding-right: 47px; /* 아이콘의 크기와 조금 더 크게 설정 */
@@ -48,13 +49,13 @@
     */
 }
 .search-icon {
-    position : absolute;
+    position : relative;
     background-color: transparent;
     border: none;
     
-    top: 65px;
-    left: calc(50% + 250px);
-    cursor: pointor;
+    top: 25px;
+    right : 80px;
+    cursor: pointer;
 }
 
 .search-icon img {
