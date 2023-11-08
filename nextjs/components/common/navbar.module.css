@@ -1,0 +1,38 @@
+.navbar {
+  width: 100vw;
+  height: 60px;
+  min-width: 1440px;
+  display: flex;
+  justify-content: center;
+  background: #c2570c; /* Orange color for the top bar */
+  position: sticky;
+  /* padding: 0 16px; */
+  align-items: center;
+}
+.navbarInner {
+  width: 1440px;
+  display: flex;
+  justify-content: space-between;
+  padding: 0 16px;
+  align-items: center;
+}
+.logo {
+  width: 120px;
+  height: 30px;
+  cursor: pointer;
+  /* height
+  : auto; */
+}
+.login {
+  width: 36px;
+  height: 36px;
+}
+.loginWrapper {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.loginText {
+  color: white;
+  cursor: pointer;
+}
