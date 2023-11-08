@@ -1,0 +1,23 @@
+.layout {
+    width: 800px;
+    height: 100px;
+    background-color: lightblue;
+}
+
+
+.box {
+    width: 800px;
+    height: 40px;
+    background-color: rgba(234, 237, 239, 1);
+
+}
+
+
+.namestyle{
+    color: var(--black, #000);
+    font-family: Inter;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+}
