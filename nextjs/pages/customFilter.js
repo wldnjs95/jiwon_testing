@@ -31,7 +31,9 @@ const defaultItems = [
 
 ]
 
-export function FilterCombo({ items = defaultItems, placeholder = 'Default Placeholder' }) {
+export function FilterCombo({ items = defaultItems, placeholder = 'Default Placeholder', onSelect }) {
+  console.log("[customFilter.js][FilterCombo] executed");
+  console.log('items = ', items);
   const [open, setOpen] = React.useState(false)
   const [value, setValue] = React.useState("")
 
@@ -42,7 +44,7 @@ export function FilterCombo({ items = defaultItems, placeholder = 'Default Place
           variant="outline"
           role="combobox"
           aria-expanded={open}
-          className="w-[200px] justify-between"
+          className="w-[300px] justify-between"
         >
           {value
             ? <span className={value ? "font-bold text-utOrange" : "text-gray-400"}>
@@ -52,7 +54,7 @@ export function FilterCombo({ items = defaultItems, placeholder = 'Default Place
           <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
         </Button>
       </PopoverTrigger>
-      <PopoverContent className="w-[200px] p-0">
+      <PopoverContent className="w-[300px] p-0 max-h-[250px] overflow-y-auto">
         <Command>
           <CommandInput placeholder={`Search ${placeholder.toLowerCase()}...`} />
           <CommandEmpty>No framework found.</CommandEmpty>
@@ -63,6 +65,7 @@ export function FilterCombo({ items = defaultItems, placeholder = 'Default Place
                 onSelect={() => {
                   setValue(item.value === value ? "" : item.value)
                   setOpen(false)
+                  onSelect(item.value);
                 }}
               >
                 <Check
