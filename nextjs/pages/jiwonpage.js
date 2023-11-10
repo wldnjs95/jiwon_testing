@@ -7,7 +7,7 @@ import FilterCombo from "./customFilter.js";
 import React, { useState, useEffect } from 'react';
 import { connectDB } from "@/util/database";
 
-// FilterCombo 컴포넌트에 전달할 고유한 필터 옵션을 추출하는 함수
+// extract filter options for FilterCombo component
 function extractAndStructureFilterOptions(searchResults, field) {
   console.log('[Function] extractFilterOptions executed');
 
@@ -22,7 +22,7 @@ function extractAndStructureFilterOptions(searchResults, field) {
     const acronym = option
       .split(' ')
       .map(word => word.charAt(0).toUpperCase()) // to upper case
-      .join(''); 
+      .join('');
     return {
       value: acronym,
       label: option
@@ -76,6 +76,7 @@ export default function Home({ courses }) {
   const [selectedCourse, setSelectedCourse] = useState(null);
   const [selectedProfessor, setSelectedProfessor] = useState(null);
 
+
   // return filter results
   const getFilteredResults = () => {
     return searchResults.filter(result => {
@@ -86,10 +87,14 @@ export default function Home({ courses }) {
 
   //selecting filter
   const handleCourseFilterChange = (course) => {
+    console.log('[jiwonpage.js][handleCourseFilterChange] executed')
     setSelectedCourse(course);
+    console.log('selected course : ', selectedCourse);
   };
   const handleProfessorFilterChange = (professor) => {
+    console.log('[jiwonpage.js][handleProfessorFilterChange] executed')
     setSelectedProfessor(professor);
+    console.log('selected professor : ', selectedProfessor);
   };
 
   // render by filter results
@@ -120,6 +125,11 @@ export default function Home({ courses }) {
     const professorOptions = extractAndStructureFilterOptions(results, 'professor');
     setProfessorOptions(professorOptions);
     console.log('professorOptions : ' + JSON.stringify(professorOptions, null, 2));
+
+    // Reset filter values when new search is performed
+    setSelectedCourse(null);
+    setSelectedProfessor(null);
+
   };
 
 
@@ -133,8 +143,8 @@ export default function Home({ courses }) {
       <div className={styles["filter"]}>
         <p className={styles["filter-title"]}>Filter by ...</p>
         <div className={styles["filters-row"]}>
-          <FilterCombo items={courseOptions} placeholder="Course" onSelect={handleCourseFilterChange} />
-          <FilterCombo items={professorOptions} placeholder="Professor"  onSelect={handleProfessorFilterChange} />
+          <FilterCombo items={courseOptions} placeholder="Course" onSelect={handleCourseFilterChange} selectedValue={selectedCourse} />
+          <FilterCombo items={professorOptions} placeholder="Professor" onSelect={handleProfessorFilterChange} selectedValue={selectedProfessor} />
         </div>
       </div>
 

@@ -21,21 +21,25 @@ import {
 /*value fetch from db later*/
 const defaultItems = [
   {
-    value: "next.js",
-    label: "Default Filter Value",
+    value: "Default Filter Value",
+    label: "next.js",
   },
   {
-    value: "sveltekit",
-    label: "Default Filter Value2",
+    value: "Default Filter Value 2",
+    label: "next.js 2",
   },
 
 ]
 
-export function FilterCombo({ items = defaultItems, placeholder = 'Default Placeholder', onSelect }) {
+export function FilterCombo({ items = defaultItems, placeholder = 'Default Placeholder', onSelect, selectedValue }) {
   console.log("[customFilter.js][FilterCombo] executed");
   console.log('items = ', items);
   const [open, setOpen] = React.useState(false)
   const [value, setValue] = React.useState("")
+
+  React.useEffect(() => {
+    setValue(selectedValue);
+  }, [selectedValue]);
 
   return (
     <Popover open={open} onOpenChange={setOpen}>
@@ -65,7 +69,7 @@ export function FilterCombo({ items = defaultItems, placeholder = 'Default Place
                 onSelect={() => {
                   setValue(item.value === value ? "" : item.value)
                   setOpen(false)
-                  onSelect(item.value);
+                  onSelect(item.value); // handleCourseFilterChange
                 }}
               >
                 <Check
